@@ -1,11 +1,9 @@
-using System.Collections;
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
 {
-   
     int[] map;
 
     void PrintArray() 
@@ -64,7 +62,6 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     
         map = new int[] {2, 0, 0, 1, 0, 0, 0, 2, 2 };
         PrintArray();
     }
@@ -72,7 +69,6 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             int playerIndex = GetPlayerIndex();
@@ -90,5 +86,4 @@ public class GameManagerScript : MonoBehaviour
             PrintArray();
         }
     }
-    
 }

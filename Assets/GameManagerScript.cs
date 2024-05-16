@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManagerScript : MonoBehaviour
@@ -9,6 +10,8 @@ public class GameManagerScript : MonoBehaviour
     int[,] map;
     GameObject[,] field;
     GameObject instance;
+
+    string debugText = "Clear!";
 
     bool MoveNumber(Vector2Int moveFrom, Vector2Int moveTo)
     {
@@ -49,38 +52,47 @@ public class GameManagerScript : MonoBehaviour
         return new Vector2Int(-1, -1);
     }
 
-    //void PrintArray()
-    //{
-    //    string debugText = "";
+    bool IsClear()
+    {
+        List<Vector2Int> goals = new List<Vector2Int>();
 
-    //    for (int y = 0; y < map.GetLength(0); y++)
-    //    {
-    //        for (int x = 0; x < map.GetLength(1); x++)
-    //        {
-    //            debugText += map[y, x].ToString() + ",";
-    //        }
+        for(int  y = 0; y < map.GetLength(0); y++)
+        {
+            for(int x = 0; x < map.GetLength(1); x++)
+            {
+                if (map[y,x] == 3)
+                {
+                    goals.Add(new Vector2Int(x, y));
+                }
+            }
+        }
 
-    //        debugText += "\n";
-    //    }
+        for(int  i = 0; i < goals.Count; i++)
+        {
+            GameObject result = field[goals[i].y, goals[i].x];
+            if(result == null || result.tag != "Box")
+            {
+                return false;
+            }
+        }
 
-    //    Debug.Log(debugText);
-    //}
+        return true;
+    }
 
+   
     void Start()
     {
         map = new int[,]
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 1, 0, 0, 0, 0, 3, 0, 0, 0 },
             { 0, 0, 2, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 0, 0, 0, 2, 2, 0, 0 },
+            { 0, 0, 2, 0, 0, 2, 0, 3, 0 },
+            { 0, 3, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
       
         };
-
-        //PrintArray();
 
         field = new GameObject[
             map.GetLength(0),
@@ -114,29 +126,44 @@ public class GameManagerScript : MonoBehaviour
         {
             var playerIndex = GetPlayerIndex();
             MoveNumber(playerIndex, playerIndex + Vector2Int.right);
-            //PrintArray();
+
+            if (IsClear())
+            {
+                Debug.Log(debugText);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             var playerIndex = GetPlayerIndex();
             MoveNumber(playerIndex, playerIndex + Vector2Int.left);
-            //PrintArray();
+
+            if (IsClear())
+            {
+                Debug.Log(debugText);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             var playerIndex = GetPlayerIndex();
             MoveNumber(playerIndex, playerIndex - Vector2Int.up);
-            //PrintArray();
+
+            if (IsClear())
+            {
+                Debug.Log(debugText);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             var playerIndex = GetPlayerIndex();
             MoveNumber(playerIndex, playerIndex - Vector2Int.down);
-            //PrintArray();
 
+            if (IsClear())
+            {
+                Debug.Log(debugText);
+            }
         }
     }
 

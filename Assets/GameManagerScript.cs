@@ -7,11 +7,11 @@ public class GameManagerScript : MonoBehaviour
 {
     public GameObject playerPrefab;
     public GameObject boxPrefab;
+
+    public GameObject ClearText;
     int[,] map;
     GameObject[,] field;
     GameObject instance;
-
-    string debugText = "Clear!";
 
     bool MoveNumber(Vector2Int moveFrom, Vector2Int moveTo)
     {
@@ -99,6 +99,8 @@ public class GameManagerScript : MonoBehaviour
             map.GetLength(1)
         ];
 
+        ClearText.SetActive(false);
+
         for (int y = 0; y < map.GetLength(0); y++)
         {
             for (int x = 0; x < map.GetLength(1); x++)
@@ -120,8 +122,11 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    
+
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             var playerIndex = GetPlayerIndex();
@@ -129,7 +134,7 @@ public class GameManagerScript : MonoBehaviour
 
             if (IsClear())
             {
-                Debug.Log(debugText);
+                ClearText.SetActive(true);
             }
         }
 
@@ -140,7 +145,7 @@ public class GameManagerScript : MonoBehaviour
 
             if (IsClear())
             {
-                Debug.Log(debugText);
+                ClearText.SetActive(true);
             }
         }
 
@@ -151,7 +156,7 @@ public class GameManagerScript : MonoBehaviour
 
             if (IsClear())
             {
-                Debug.Log(debugText);
+                ClearText.SetActive(true);
             }
         }
 
@@ -162,7 +167,7 @@ public class GameManagerScript : MonoBehaviour
 
             if (IsClear())
             {
-                Debug.Log(debugText);
+                ClearText.SetActive(true);
             }
         }
     }

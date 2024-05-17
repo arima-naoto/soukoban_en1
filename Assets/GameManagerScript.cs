@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class GameManagerScript : MonoBehaviour
         if (moveTo.x < 0 || moveTo.x >= field.GetLength(1))
             return false;
 
-        if (field[moveTo.y,moveTo.x] != null && field[moveTo.y,moveTo.x].tag == "Box")
+        if (field[moveTo.y, moveTo.x] != null && field[moveTo.y, moveTo.x].tag == "Box")
         {
             Vector2Int velocity = moveTo - moveFrom;
             bool success = MoveNumber(moveTo, moveTo + velocity);
@@ -48,7 +49,7 @@ public class GameManagerScript : MonoBehaviour
                 if (obj != null && obj.tag == "Player")
                 {
                     return new Vector2Int(x, y);
-                } 
+                }
             }
         }
         return new Vector2Int(-1, -1);
@@ -58,21 +59,21 @@ public class GameManagerScript : MonoBehaviour
     {
         List<Vector2Int> goals = new List<Vector2Int>();
 
-        for(int  y = 0; y < map.GetLength(0); y++)
+        for (int y = 0; y < map.GetLength(0); y++)
         {
-            for(int x = 0; x < map.GetLength(1); x++)
+            for (int x = 0; x < map.GetLength(1); x++)
             {
-                if (map[y,x] == 3)
+                if (map[y, x] == 3)
                 {
                     goals.Add(new Vector2Int(x, y));
                 }
             }
         }
 
-        for(int  i = 0; i < goals.Count; i++)
+        for (int i = 0; i < goals.Count; i++)
         {
             GameObject result = field[goals[i].y, goals[i].x];
-            if(result == null || result.tag != "Box")
+            if (result == null || result.tag != "Box")
             {
                 return false;
             }
@@ -81,7 +82,7 @@ public class GameManagerScript : MonoBehaviour
         return true;
     }
 
-   
+
     void Start()
     {
         Screen.SetResolution(1280, 720, false);
@@ -95,7 +96,7 @@ public class GameManagerScript : MonoBehaviour
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-      
+
         };
 
         field = new GameObject[
@@ -104,7 +105,7 @@ public class GameManagerScript : MonoBehaviour
         ];
 
         ClearText.SetActive(false);
-  
+
 
         for (int y = 0; y < map.GetLength(0); y++)
         {
@@ -117,20 +118,20 @@ public class GameManagerScript : MonoBehaviour
                     field[y, x] = instance;
                     break;
                 }
-                else if (map[y,x] == 2)
+                else if (map[y, x] == 2)
                 {
                     instance =
                         Instantiate(boxPrefab, new Vector3(x, -1 * y, 0), Quaternion.identity);
                     field[y, x] = instance;
-                }else if (map[y,x] == 3)
+                } else if (map[y, x] == 3)
                 {
-                    instance = Instantiate(goalPrefab, new Vector3(x,-1 * y, 0), Quaternion.identity);
+                    instance = Instantiate(goalPrefab, new Vector3(x, -1 * y, 0), Quaternion.identity);
                 }
             }
         }
     }
 
-    
+
 
     void Update()
     {
@@ -178,6 +179,11 @@ public class GameManagerScript : MonoBehaviour
                 ClearText.SetActive(true);
             }
         }
-    }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
 }
+

@@ -7,6 +7,7 @@ public class GameManagerScript : MonoBehaviour
 {
     public GameObject playerPrefab;
     public GameObject boxPrefab;
+    public GameObject goalPrefab;
 
     public GameObject ClearText;
     int[,] map;
@@ -85,10 +86,10 @@ public class GameManagerScript : MonoBehaviour
         map = new int[,]
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-            { 1, 0, 0, 0, 0, 3, 0, 0, 0 },
-            { 0, 0, 2, 0, 0, 0, 0, 0, 0 },
-            { 0, 0, 2, 0, 0, 2, 0, 3, 0 },
-            { 0, 3, 0, 0, 0, 0, 0, 0, 0 },
+            { 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+            { 0, 0, 0, 3, 0, 3, 0, 0, 0 },
+            { 0, 0, 0, 0, 2, 0, 0, 0, 0 },
+            { 0, 0, 0, 2, 3, 2, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },
       
@@ -100,6 +101,7 @@ public class GameManagerScript : MonoBehaviour
         ];
 
         ClearText.SetActive(false);
+  
 
         for (int y = 0; y < map.GetLength(0); y++)
         {
@@ -117,6 +119,9 @@ public class GameManagerScript : MonoBehaviour
                     instance =
                         Instantiate(boxPrefab, new Vector3(x, -1 * y, 0), Quaternion.identity);
                     field[y, x] = instance;
+                }else if (map[y,x] == 3)
+                {
+                    instance = Instantiate(goalPrefab, new Vector3(x,-1 * y, 0), Quaternion.identity);
                 }
             }
         }

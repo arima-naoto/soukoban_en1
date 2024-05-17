@@ -29,8 +29,9 @@ public class GameManagerScript : MonoBehaviour
             if (!success) { return false; }
         }
 
-        field[moveFrom.y, moveFrom.x].transform.position =
-            new Vector3(moveTo.x, -1 * moveTo.y, 0);
+        //field[moveFrom.y, moveFrom.x].transform.position = new Vector3(moveTo.x, -1 * moveTo.y, 0);
+        Vector3 moveToPosition = new Vector3(moveTo.x, -1 * moveTo.y, 0);
+        field[moveFrom.y, moveFrom.x].GetComponent<Move>().MoveTo(moveToPosition);
         field[moveTo.y, moveTo.x] = field[moveFrom.y, moveFrom.x];
         field[moveFrom.y, moveFrom.x] = null;
         return true;
@@ -83,6 +84,8 @@ public class GameManagerScript : MonoBehaviour
    
     void Start()
     {
+        Screen.SetResolution(1280, 720, false);
+
         map = new int[,]
         {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0 },

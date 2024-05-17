@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 210520271049800278}
   - component: {fileID: 3384400403237333669}
   - component: {fileID: 1821893346987540653}
+  - component: {fileID: 3869951966613561319}
   m_Layer: 0
   m_Name: Box
   m_TagString: Box
-  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2604466134116390117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.003047571, y: -0.03, z: -0.17595549}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -105,3 +106,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3869951966613561319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2604466134116390117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698e47f8dd7a8b647b4c569628d2d5b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

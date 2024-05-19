@@ -30,6 +30,11 @@ public class Move : MonoBehaviour
         destination = newDestination;
     }
 
+    public float EaseInSine(float x)
+    {
+        return 1.0f - Mathf.Cos((x * Mathf.PI) / 2.0f);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -43,7 +48,7 @@ public class Move : MonoBehaviour
 
         float easing = timeRate;
 
-        Vector3 currentPosition = Vector3.Lerp(origin, destination, easing);
+        Vector3 currentPosition = Vector3.Lerp(origin, destination, EaseInSine(easing));
 
         transform.position = currentPosition;
     }

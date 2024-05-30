@@ -25,18 +25,27 @@ public class Particle : MonoBehaviour
         float maxVelocity = 5;
 
         velocity = new Vector3
-            (Random.Range(-maxVelocity, maxVelocity),Random.Range(-maxVelocity, maxVelocity),0);
+          (
+            Random.Range(-maxVelocity, maxVelocity),
+            Random.Range(-maxVelocity, maxVelocity),
+            0
+          );
     }
 
     // Update is called once per frame
     void Update()
     {
-        leftLifeTime += Time.deltaTime;
+        leftLifeTime -= Time.deltaTime;
 
         transform.position += velocity * Time.deltaTime;
 
-        transform.localScale = Vector3.Lerp(Vector3.zero, defaultScale, leftLifeTime / lifeTime);
+        transform.localScale = Vector3.Lerp
+        (
+            new Vector3(0, 0, 0), 
+            defaultScale, 
+            leftLifeTime / lifeTime
+        );
 
-        if(leftLifeTime <= 0) { Destroy(gameObject); }
+        if (leftLifeTime <= 0) { Destroy(gameObject); }
     }
 }

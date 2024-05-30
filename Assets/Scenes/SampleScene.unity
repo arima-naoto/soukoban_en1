@@ -154,7 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5748836338383931591, guid: 6f4146ba05d44df48b6aecf56d9eb1a8, type: 3}
   boxPrefab: {fileID: 2604466134116390117, guid: f1f18e62936fc6c44b8adacfe2557ba7, type: 3}
-  goalPrefab: {fileID: 7267485550035507604, guid: be3285e854b5ac04cb2205c2e5b449b5, type: 3}
+  goalPrefab: {fileID: 490761877643648714, guid: 2d7c4ca9d56bbdc41ab20b7aa9c353b3, type: 3}
+  particlePrefab: {fileID: 6399898030096058092, guid: 96b83bc42048960468fb220300a1bbb6, type: 3}
+  notMoveBoxPrefab: {fileID: 829985234763908728, guid: 492e2034999aaa34a94366abf583fd03, type: 3}
   ClearText: {fileID: 870015850}
 --- !u!4 &13301687
 Transform:
@@ -399,9 +401,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 383543508}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 353, y: -304}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -237, y: 42}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &870015852
@@ -433,8 +435,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4292188283
-  m_fontColor: {r: 0.4830687, g: 0.59505606, b: 0.83396226, a: 1}
+    rgba: 4294933504
+  m_fontColor: {r: 0, g: 0.486902, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -587,7 +589,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5, y: -3, z: -10}
+  m_LocalPosition: {x: 3, y: -3, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

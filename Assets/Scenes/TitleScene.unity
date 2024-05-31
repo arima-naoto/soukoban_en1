@@ -689,33 +689,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1683127286}
-  - component: {fileID: 1683127285}
+  - component: {fileID: 1683127287}
   m_Layer: 0
-  m_Name: GameManegerObject
+  m_Name: SceneManeger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1683127285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1683127284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ff140bf63f5b594eab4341aa4bd635f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
-  boxPrefab: {fileID: 0}
-  goalPrefab: {fileID: 0}
-  particlePrefab: {fileID: 0}
-  notMoveBoxPrefab: {fileID: 0}
-  ClearText: {fileID: 0}
-  nextSceneName: GameScene
 --- !u!4 &1683127286
 Transform:
   m_ObjectHideFlags: 0
@@ -731,6 +712,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1683127287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683127284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1db5ec087ba0c4ab1ff99c18bde990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneName: GameScene
 --- !u!1 &2133339660
 GameObject:
   m_ObjectHideFlags: 0

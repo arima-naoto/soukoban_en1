@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
-   
+
     public GameObject playerPrefab; //プレイヤープレハブ
 
     public GameObject boxPrefab;//ボックスプレハブ
@@ -18,6 +18,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject notMoveBoxPrefab;//動かない壁のプレハブ
 
     public GameObject ClearText; //クリアテキスト
+    public GameObject BottomText;
 
     int[,] map; //レベルデザイン用配列
 
@@ -71,18 +72,18 @@ public class GameManagerScript : MonoBehaviour
     bool MoveNumber(Vector2Int moveFrom, Vector2Int moveTo)//再帰処理を行うメゾット
     {
         //二次元配列に対応させる
-        if (moveTo.y < 0 || moveTo.y >= field.GetLength(0)) {  return false; }
-        if (moveTo.x < 0 || moveTo.x >= field.GetLength(1)) {  return false; }
+        if (moveTo.y < 0 || moveTo.y >= field.GetLength(0)) { return false; }
+        if (moveTo.x < 0 || moveTo.x >= field.GetLength(1)) { return false; }
 
         //NotMoveBoxタグを持っているならば
-        if (field[moveTo.y, moveTo.x] != null && field[moveTo.y, moveTo.x].tag == "NotMoveBox") 
-        { 
+        if (field[moveTo.y, moveTo.x] != null && field[moveTo.y, moveTo.x].tag == "NotMoveBox")
+        {
             //プレイヤーは動かない壁から進めない、また進むことが出来ないのでパーティクルも出ない
-            return false; 
+            return false;
         }
 
         //パーティクルを生成する位置を設定する
-        Vector3 particlePosition = new Vector3(moveTo.x,-1 * moveTo.y,0);
+        Vector3 particlePosition = new Vector3(moveTo.x, -1 * moveTo.y, 0);
 
         //パーティクルを生成する
         GenerateParticles(particlePosition);
@@ -92,7 +93,7 @@ public class GameManagerScript : MonoBehaviour
         {
             Vector2Int velocity = moveTo - moveFrom;// 移動方向を計算する
             bool success = MoveNumber(moveTo, moveTo + velocity);
-            if (!success) { return false;}
+            if (!success) { return false; }
         }
 
         field[moveTo.y, moveTo.x] = field[moveFrom.y, moveFrom.x];
@@ -129,20 +130,21 @@ public class GameManagerScript : MonoBehaviour
         map = new int[,]
         {
             {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
-            {4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4},
+            {4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4},
             {4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4},
             {4, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 4},
             {4, 0, 0, 4, 0, 0, 2, 0, 3, 0, 4, 0, 4, 0, 0, 0, 0, 0, 0, 4},
-            {4, 0, 0, 3, 4, 0, 4, 4, 4, 0, 4, 0, 4, 0, 3, 0, 4, 4, 0, 4},
-            {4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 4, 3, 4, 0, 0, 0, 0, 2, 0, 4},
-            {4, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4, 4, 0, 4},
-            {4, 0, 2, 0, 0, 0, 3, 4, 4, 0, 0, 4, 0, 0, 0, 2, 0, 0, 0, 4},
-            {4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4},
+            {4, 0, 0, 3, 4, 0, 4, 4, 4, 0, 4, 0, 4, 0, 3, 0, 0, 2, 0, 4},
+            {4, 0, 0, 4, 0, 0, 0, 0, 0, 0, 4, 3, 4, 0, 0, 0, 0, 4, 0, 4},
+            {4, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 4, 0, 4},
+            {4, 0, 2, 0, 0, 0, 3, 4, 4, 0, 0, 4, 0, 0, 0, 2, 0, 4, 0, 4},
+            {4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 4},
             {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
-        };  
-        
+        };
+
         //ゲームクリア時にテキストを描画したいので、今はfalseにしておく
         ClearText.SetActive(false);
+        BottomText.SetActive(false);
 
         //ゲームオブジェクトの管理を行う
         field = new GameObject
@@ -173,7 +175,7 @@ public class GameManagerScript : MonoBehaviour
 
                     //ボックスをfieldへ格納する
                     field[y, x] = instance;
-                } 
+                }
                 //マップ番号が [3] である場合
                 else if (map[y, x] == 3)
                 {
@@ -181,7 +183,7 @@ public class GameManagerScript : MonoBehaviour
                     instance = Instantiate(goalPrefab, new Vector3(x, -1 * y, 0.01f), Quaternion.identity);
                 }
                 //マップ番号が [4] である場合
-                else if (map[y,x] == 4)
+                else if (map[y, x] == 4)
                 {
                     //マップ番号 [4] の所に動かない壁を生成する
                     instance = Instantiate(notMoveBoxPrefab, new Vector3(x, -1 * y, 0), Quaternion.identity);
@@ -200,7 +202,7 @@ public class GameManagerScript : MonoBehaviour
         {
             //playerIndexにPlayerを判断するメゾットを格納する
             Vector2Int playerIndex = GetPlayerIndex();
-            
+
             //プレイヤーを右方向に移動させる
             MoveNumber(playerIndex, playerIndex + new Vector2Int(1, 0));
 
@@ -209,6 +211,7 @@ public class GameManagerScript : MonoBehaviour
             {
                 //ゲームクリア用のテキストを出現させる
                 ClearText.SetActive(true);
+                BottomText.SetActive(true);
             }
         }
 
@@ -225,6 +228,7 @@ public class GameManagerScript : MonoBehaviour
             {
                 //ゲームクリア用のテキストを出現させる
                 ClearText.SetActive(true);
+                BottomText.SetActive(true);
             }
         }
 
@@ -241,6 +245,7 @@ public class GameManagerScript : MonoBehaviour
             {
                 //ゲームクリア用のテキストを出現させる
                 ClearText.SetActive(true);
+                BottomText.SetActive(true);
             }
         }
 
@@ -257,6 +262,7 @@ public class GameManagerScript : MonoBehaviour
             {
                 //ゲームクリア用のテキストを出現させる
                 ClearText.SetActive(true);
+                BottomText.SetActive(true);
             }
         }
 
@@ -267,10 +273,16 @@ public class GameManagerScript : MonoBehaviour
             SceneManager.LoadScene(0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        //クリア時
+        if (IsClear())
         {
-            SceneManager.LoadScene(nextSceneName);
+            //スペースキーが押されたら
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                //シーンをタイトルに変更する
+                SceneManager.LoadScene(nextSceneName);
+            }
+
         }
     }
 }
-

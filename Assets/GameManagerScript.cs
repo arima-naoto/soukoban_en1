@@ -265,13 +265,6 @@ public class GameManagerScript : MonoBehaviour
             //ゲームをリセットする
             SceneManager.LoadScene(0);
         }
-
-        //Fキーを押したら
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //フルスクリーンやウィンドウモードに設定できる
-            Screen.fullScreen = !Screen.fullScreen;
-        }
     }
 }
 

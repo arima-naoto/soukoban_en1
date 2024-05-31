@@ -25,7 +25,7 @@ public class GameManagerScript : MonoBehaviour
 
     GameObject instance;//初期化用変数
 
-
+    public string nextSceneName;//シーン切り替え処理
 
     void GenerateParticles(Vector3 position) //パーティクルを複数個生成するメゾット
     {
@@ -124,8 +124,6 @@ public class GameManagerScript : MonoBehaviour
 
     void Start()
     {
-        //ゲームクリアしたときにクリア用のテキストを出したいので、今はfalseにしておく
-        ClearText.SetActive(false);
 
         //フィールドマップの宣言
         map = new int[,]
@@ -142,6 +140,9 @@ public class GameManagerScript : MonoBehaviour
             {4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4},
             {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
         };  
+        
+        //ゲームクリア時にテキストを描画したいので、今はfalseにしておく
+        ClearText.SetActive(false);
 
         //ゲームオブジェクトの管理を行う
         field = new GameObject
@@ -264,6 +265,11 @@ public class GameManagerScript : MonoBehaviour
         {
             //ゲームをリセットする
             SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(nextSceneName);
         }
     }
 }

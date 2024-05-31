@@ -270,7 +270,7 @@ public class GameManagerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             //ゲームをリセットする
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
 
         //クリア時
